@@ -1,0 +1,8 @@
+# robots.txt for levkany.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://levkany.com/sitemap.xml
+
