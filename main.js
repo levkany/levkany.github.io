@@ -15,7 +15,14 @@
         terminalInput: document.getElementById('terminalInput'),
         terminalOutput: document.getElementById('terminalOutput'),
         terminalBody: document.getElementById('terminalBody'),
-        terminal: document.querySelector('.terminal')
+        terminal: document.querySelector('.terminal-col .terminal'),
+        // Mobile terminal
+        terminalFab: document.getElementById('terminalFab'),
+        terminalOverlay: document.getElementById('terminalOverlay'),
+        terminalClose: document.getElementById('terminalClose'),
+        mobileTerminalInput: document.getElementById('mobileTerminalInput'),
+        mobileTerminalOutput: document.getElementById('mobileTerminalOutput'),
+        mobileTerminalBody: document.getElementById('mobileTerminalBody')
     };
 
     // ==========================================================================
@@ -188,7 +195,8 @@ Type "github" or "linkedin" to open directly.`,
 
             // Clear command
             if (cmd === 'clear') {
-                elements.terminalOutput.innerHTML = '';
+                if (elements.terminalOutput) elements.terminalOutput.innerHTML = '';
+                if (elements.mobileTerminalOutput) elements.mobileTerminalOutput.innerHTML = '';
                 return { type: 'response', text: null };
             }
 
@@ -263,6 +271,74 @@ Type "github" or "linkedin" to open directly.`,
     };
 
     // ==========================================================================
+    // Mobile Terminal Overlay
+    // ==========================================================================
+    
+    const mobileTerminal = {
+        init() {
+            if (!elements.terminalFab) return;
+
+            elements.terminalFab.addEventListener('click', () => this.open());
+            elements.terminalClose.addEventListener('click', () => this.close());
+            
+            // Close on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && elements.terminalOverlay.classList.contains('open')) {
+                    this.close();
+                }
+            });
+
+            // Setup mobile terminal input
+            if (elements.mobileTerminalInput) {
+                elements.mobileTerminalInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        const input = elements.mobileTerminalInput.value.trim();
+                        if (input) {
+                            this.addCommand(input);
+                            const result = terminal.processCommand(input);
+                            if (result.text !== null) {
+                                this.addLine(result.text, result.type);
+                            }
+                        }
+                        elements.mobileTerminalInput.value = '';
+                    }
+                });
+            }
+        },
+
+        open() {
+            elements.terminalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => elements.mobileTerminalInput?.focus(), 300);
+        },
+
+        close() {
+            elements.terminalOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        },
+
+        addLine(text, type = 'response') {
+            if (text === null) return;
+            
+            text.split('\n').forEach(line => {
+                const div = document.createElement('div');
+                div.className = `terminal-line ${type}`;
+                div.innerHTML = (line || ' ').replace(/(\([^)]+\))/g, '<span class="dim">$1</span>');
+                elements.mobileTerminalOutput.appendChild(div);
+            });
+            
+            elements.mobileTerminalBody.scrollTop = elements.mobileTerminalBody.scrollHeight;
+        },
+
+        addCommand(cmd) {
+            const div = document.createElement('div');
+            div.className = 'terminal-line command';
+            div.textContent = cmd;
+            elements.mobileTerminalOutput.appendChild(div);
+        }
+    };
+
+    // ==========================================================================
     // Initialize
     // ==========================================================================
     
@@ -270,6 +346,7 @@ Type "github" or "linkedin" to open directly.`,
         cursor.init();
         gridParallax.init();
         terminal.init();
+        mobileTerminal.init();
     });
 
 })();

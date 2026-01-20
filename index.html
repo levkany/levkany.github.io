@@ -83,6 +83,55 @@
 <!-- Custom Cursor -->
 <div class="cursor-circle"></div>
 
+<!-- Mobile Bottom Bar -->
+<div class="mobile-bottom-bar">
+    <a href="resume.pdf" download class="mobile-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Download CV</span>
+    </a>
+    <button class="mobile-btn" id="terminalFab" aria-label="Open Terminal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 17 10 11 4 5"></polyline>
+            <line x1="12" y1="19" x2="20" y2="19"></line>
+        </svg>
+        <span>Open Terminal</span>
+    </button>
+</div>
+
+<!-- Mobile Terminal Overlay -->
+<div class="terminal-overlay" id="terminalOverlay">
+    <div class="terminal-overlay-header">
+        <span class="terminal-overlay-title">Terminal</span>
+        <button class="terminal-overlay-close" id="terminalClose" aria-label="Close Terminal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <span class="terminal-title">levkany.com</span>
+        </div>
+        <div class="terminal-body" id="mobileTerminalBody">
+            <div class="terminal-output" id="mobileTerminalOutput">
+                <div class="terminal-line response">Welcome! Type <strong>"help"</strong> to see available commands.</div>
+            </div>
+            <div class="terminal-input-row">
+                <span class="terminal-prompt">$</span>
+                <input type="text" class="terminal-input" id="mobileTerminalInput" placeholder="type a command..." autocomplete="off">
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="main">
     <!-- Background Elements -->
     <div class="grid-bg"></div>
