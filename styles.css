@@ -30,6 +30,7 @@ html, body {
     background-color: var(--color-bg);
     color: var(--color-text);
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -100,7 +101,7 @@ a:hover {
     display: flex;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
     padding: 60px 0;
 }
 
@@ -543,8 +544,14 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+    html, body {
+        overflow-y: auto;
+        touch-action: pan-y;
+    }
+
     .main {
         padding: 40px 0 100px;
+        overflow: visible;
     }
 
     .main .container {
@@ -602,47 +609,46 @@ a:hover {
         display: none;
     }
 
-    /* Mobile Bottom Bar */
+    /* Mobile Floating Buttons */
     .mobile-bottom-bar {
         display: flex;
+        flex-direction: column;
         position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: var(--color-bg);
-        border-top: 1px solid var(--color-border);
-        padding: 16px 24px 20px;
+        bottom: 24px;
+        right: 20px;
         gap: 12px;
         z-index: 1000;
     }
 
     .mobile-btn {
-        flex: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
-        padding: 10px 12px;
+        width: 48px;
+        height: 48px;
         background: var(--color-text);
         color: var(--color-bg);
         border: none;
-        border-radius: 6px;
-        font-family: var(--font-body);
-        font-size: 0.8rem;
-        font-weight: 500;
+        border-radius: 50%;
         cursor: pointer;
         text-decoration: none;
-        transition: opacity 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     .mobile-btn:hover {
-        opacity: 0.9;
+        transform: scale(1.05);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
         color: var(--color-bg);
     }
 
+    .mobile-btn span {
+        display: none;
+    }
+
     .mobile-btn svg {
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
     }
 
     /* Terminal Overlay */
