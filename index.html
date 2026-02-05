@@ -14,10 +14,10 @@
     <meta name="language" content="English">
     
     <!-- Theme & Browser Colors -->
-    <meta name="theme-color" content="#000000">
-    <meta name="msapplication-TileColor" content="#000000">
-    <meta name="msapplication-navbutton-color" content="#000000">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-navbutton-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     
@@ -70,7 +70,7 @@
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -80,141 +80,52 @@
 </head>
 <body>
 
-<!-- Custom Cursor -->
-<div class="cursor-circle"></div>
-
-<!-- Mobile Bottom Bar -->
-<div class="mobile-bottom-bar">
-    <a href="resume.pdf" download class="mobile-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
-        <span>Download CV</span>
-    </a>
-    <button class="mobile-btn" id="terminalFab" aria-label="Open Terminal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="4 17 10 11 4 5"></polyline>
-            <line x1="12" y1="19" x2="20" y2="19"></line>
-        </svg>
-        <span>Open Terminal</span>
-    </button>
-</div>
-
-<!-- Mobile Terminal Overlay -->
-<div class="terminal-overlay" id="terminalOverlay">
-    <div class="terminal-overlay-header">
-        <span class="terminal-overlay-title">Terminal</span>
-        <button class="terminal-overlay-close" id="terminalClose" aria-label="Close Terminal">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-    </div>
-    <div class="terminal">
-        <div class="terminal-header">
-            <div class="terminal-dot"></div>
-            <div class="terminal-dot"></div>
-            <div class="terminal-dot"></div>
-            <span class="terminal-title">levkany.com</span>
-        </div>
-        <div class="terminal-body" id="mobileTerminalBody">
-            <div class="terminal-output" id="mobileTerminalOutput">
-                <div class="terminal-line response">Welcome! Type <strong>"help"</strong> to see available commands.</div>
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-row">
+            <div class="hero-content">
+                <h1 class="page-title">Lev Kany</h1>
+                <p class="summary">
+                    Experienced backend engineer, building 
+                    <strong>production systems at scale</strong>. A strong <u>problem solver</u> 
+                    with deep expertise in <u>Python</u>.
+                </p>
             </div>
-            <div class="terminal-input-row">
-                <span class="terminal-prompt">$</span>
-                <input type="text" class="terminal-input" id="mobileTerminalInput" placeholder="type a command..." autocomplete="off">
+            <div class="hero-links">
+                <a href="https://github.com/levkany" target="_blank" rel="noopener" class="social-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/levkany/" target="_blank" rel="noopener" class="social-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    LinkedIn
+                </a>
             </div>
         </div>
     </div>
+</section>
+
+<div class="container">
+    <hr>
 </div>
 
+<!-- Gallery Section -->
 <section class="main">
-    <!-- Background Elements -->
-    <div class="grid-bg"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="corner corner-tl"></div>
-    <div class="corner corner-br"></div>
-    
     <div class="container">
         <div class="content">
-            <div class="about-row">
-                <!-- About Column -->
-                <div class="about-col">
-                    <p class="role">Backend Engineer</p>
-                    <h1 class="name">Lev Kany</h1>
-                    <p class="summary">
-                        <strong>6+ years</strong> of experience as a backend engineer, building 
-                        <strong>production systems at scale</strong>. A strong <u>problem solver</u> 
-                        with deep expertise in <u>Python</u>.
-                    </p>
-                    <div class="links-row">
-                        <a href="https://github.com/levkany" target="_blank" rel="noopener">GitHub</a>
-                        <a href="https://www.linkedin.com/in/levkany/" target="_blank" rel="noopener">LinkedIn</a>
-                        <a href="/resume.pdf" download class="download-btn">Download CV</a>
-                    </div>
-                </div>
-                
-                <!-- Terminal Column -->
-                <div class="terminal-col">
-                    <div class="terminal">
-                        <div class="terminal-header">
-                            <div class="terminal-dot"></div>
-                            <div class="terminal-dot"></div>
-                            <div class="terminal-dot"></div>
-                            <span class="terminal-title">levkany.com</span>
-                        </div>
-                        <div class="terminal-body" id="terminalBody">
-                            <div class="terminal-output" id="terminalOutput">
-                                <div class="terminal-line response">Welcome! Type <strong>"help"</strong> to see available commands.</div>
-                            </div>
-                            <div class="terminal-input-row">
-                                <span class="terminal-prompt">$</span>
-                                <input type="text" class="terminal-input" id="terminalInput" placeholder="type a command..." autocomplete="off">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
             <!-- Gallery -->
             <div class="gallery-section">
-                <p class="gallery-label">Projects & Posts</p>
-                <div class="gallery">
-                    <a href="https://github.com/levkany/PyAPI" target="_blank" rel="noopener" class="gallery-card">
-                        <p class="card-tag">Project</p>
-                        <h3>PyAPI</h3>
-                        <p>RESTful API framework built by and for Python. Lightweight and flexible.</p>
-                        <span class="card-link">View on GitHub →</span>
-                    </a>
-                    <a href="https://github.com/levkany/simple-webhooks" target="_blank" rel="noopener" class="gallery-card">
-                        <p class="card-tag">Project</p>
-                        <h3>Simple Webhooks</h3>
-                        <p>Lightweight Python package to send webhooks with minimal configuration.</p>
-                        <span class="card-link">View on GitHub →</span>
-                    </a>
-                    <a href="https://github.com/levkany/challanges" target="_blank" rel="noopener" class="gallery-card">
-                        <p class="card-tag">Project</p>
-                        <h3>Coding Challenges</h3>
-                        <p>Collection of coding challenges and my solutions to them.</p>
-                        <span class="card-link">View on GitHub →</span>
-                    </a>
-                    <a href="#" class="gallery-card">
-                        <p class="card-tag">Post</p>
-                        <h3>Building Scalable APIs</h3>
-                        <p>Best practices for designing APIs that handle millions of requests.</p>
-                        <span class="card-link">Read more →</span>
-                    </a>
-                    <a href="#" class="gallery-card">
-                        <p class="card-tag">Post</p>
-                        <h3>Clean Architecture in Python</h3>
-                        <p>How to structure your Python projects for maintainability.</p>
-                        <span class="card-link">Read more →</span>
+                
+                <!-- Grid -->
+                <div class="gallery-grid" id="galleryGrid">
+                    <a href="/blog/sample-post/" target="_blank" rel="noopener" class="post-item">
+                        <span class="post-title">How to Install Python on Windows</span>
+                        <span class="post-arrow">→ read more</span>
                     </a>
                 </div>
             </div>
@@ -222,7 +133,9 @@
     </div>
 </section>
 
-<!-- Main Script -->
-<script src="main.js"></script>
+<div class="container" style="text-align: center; padding: 2rem 0;">
+    <small>© 2026 levkany</small>
+</div>
+
 </body>
 </html>

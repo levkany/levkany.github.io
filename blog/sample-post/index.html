@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>How to Install Python on Windows — Lev Kany</title>
+    <meta name="title" content="How to Install Python on Windows — Lev Kany">
+    <meta name="description" content="A simple step-by-step guide to installing Python on Windows machines.">
+    <meta name="author" content="Lev Kany">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://levkany.com/blog/sample-post/">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../public/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../public/apple-touch-icon.png">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://levkany.com/blog/sample-post/">
+    <meta property="og:title" content="How to Install Python on Windows — Lev Kany">
+    <meta property="og:description" content="A simple step-by-step guide to installing Python on Windows machines.">
+    <meta property="og:site_name" content="Lev Kany">
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Prism.js CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/themes/prism.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+    
+    <!-- Blog Styles -->
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="page-title">How to Install Python on Windows</h1>
+            <div class="blog-meta">
+                <span>February 5, 2026</span>
+                <span class="card-tags">
+                    <small class="tag">Python</small>
+                    <small class="tag">Tutorial</small>
+                </span>
+            </div>            
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <hr>
+</div>
+
+<!-- Article -->
+<section class="main">
+    <div class="container">
+        <article>
+            <div class="blog-content">
+                <blockquote><p><b>Disclaimer:</b> No artificial intelligence tools or automated content generation systems were used in the creation of this content, except for the creation of illustration images.</p></blockquote>
+            <p>
+                Python is one of the most popular programming languages, known for its simplicity and versatility. 
+                This guide will walk you through installing Python on your Windows machine.
+            </p>
+
+            <h2>Step 1: Download Python</h2>
+            
+            <ol>
+                <li>Go to the official Python website: <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a></li>
+                <li>Click the yellow "Download Python" button to get the latest version</li>
+                <li>The website automatically detects your operating system and offers the correct installer</li>
+            </ol>
+
+            <h2>Step 2: Run the Installer</h2>
+            
+            <ol>
+                <li>Open the downloaded <code>.exe</code> file</li>
+                <li><strong>Important:</strong> Check the box that says "Add python.exe to PATH" at the bottom of the installer window</li>
+                <li>Click "Install Now" for the default installation</li>
+                <li>Wait for the installation to complete</li>
+                <li>Click "Close" when finished</li>
+            </ol>
+
+            <figure>
+                <img src="https://www.python.org/static/img/python-logo.png" alt="Python Logo">
+                <figcaption>The Python logo</figcaption>
+            </figure>
+
+            <blockquote>
+                <p>Adding Python to PATH allows you to run Python from any command prompt window without specifying the full path to the executable.</p>
+            </blockquote>
+
+            <h2>Step 3: Verify the Installation</h2>
+            
+            <p>Open Command Prompt and run:</p>
+
+            <pre data-copyable><code class="language-plaintext">python --version</code></pre>
+
+            <p>You should see output like:</p>
+
+            <pre><code class="language-plaintext">Python 3.12.0</code></pre>
+
+            <p>Also verify pip (Python's package manager) is installed:</p>
+
+            <pre data-copyable><code class="language-plaintext">pip --version</code></pre>
+
+            <h2>Step 4: Test Python</h2>
+            
+            <p>Start the Python interpreter by typing:</p>
+
+            <pre data-copyable><code class="language-plaintext">python</code></pre>
+
+            <p>Try a simple command:</p>
+
+            <pre data-copyable><code class="language-python">print("Hello, World!")</code></pre>
+
+            <p>To exit the interpreter, type <code>exit()</code> or press <code>Ctrl+Z</code> then Enter.</p>
+
+            <h2>Troubleshooting</h2>
+
+            <b>'python' is not recognized</b>
+            
+            <p>If you get this error, Python wasn't added to PATH. You can either:</p>
+            
+            <ul>
+                <li>Reinstall Python and check "Add python.exe to PATH"</li>
+                <li>Manually add Python to your system PATH environment variable</li>
+            </ul>
+
+            <b>Multiple Python versions</b>
+            
+            <p>If you have multiple versions installed, use <code>py</code> launcher to specify the version:</p>
+
+            <pre data-copyable><code class="language-plaintext">py -3.12 --version</code></pre>
+            </div>
+        </article>
+    </div>
+</section>
+
+<div class="blog-container" style="text-align: center; padding: 2rem 0;">
+    <small>© 2026 levkany</small>
+</div>
+
+<!-- Prism.js -->
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-bash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script>
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.copy-to-clipboard-button')) {
+        const btn = e.target.closest('.copy-to-clipboard-button');
+        btn.classList.add('copied');
+        setTimeout(function() { btn.classList.remove('copied'); }, 2000);
+    }
+});
+</script>
+
+</body>
+</html>
