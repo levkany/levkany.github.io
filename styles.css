@@ -50,10 +50,10 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 html, body {
-    height: 100%;
     margin: 0;
     font-family: var(--font-body);
     font-size: 16px;
@@ -62,9 +62,12 @@ html, body {
     letter-spacing: 0.01em;
     background-color: var(--color-bg);
     color: var(--color-text);
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
