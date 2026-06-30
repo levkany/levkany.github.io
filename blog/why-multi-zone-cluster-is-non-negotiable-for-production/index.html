@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Why Multi-Zone Clusters Are Non-Negotiable for Production — Lev Kany</title>
+    <meta name="description" content="A single-zone Kubernetes cluster saved on cost until zone resource exhaustion during an ArgoCD sync took production offline. Why multi-zonal clusters belong in production.">
+    <meta name="author" content="Lev Kany">
+    <meta name="robots" content="index, follow">
+
+    <meta name="theme-color" content="#0f1117">
+    <link rel="canonical" href="https://levkany.com/blog/why-multi-zone-cluster-is-non-negotiable-for-production/">
+
+    <link rel="icon" type="image/x-icon" href="../../public/favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../public/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../public/apple-touch-icon.png">
+
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://levkany.com/blog/why-multi-zone-cluster-is-non-negotiable-for-production/">
+    <meta property="og:title" content="Why Multi-Zone Clusters Are Non-Negotiable for Production — Lev Kany">
+    <meta property="og:description" content="A single-zone Kubernetes cluster saved on cost until zone resource exhaustion during an ArgoCD sync took production offline. Why multi-zonal clusters belong in production.">
+    <meta property="og:site_name" content="Lev Kany">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="/" class="site-logo">
+            <img src="../../public/favicon-96x96.png" alt="" width="36" height="36" class="logo-avatar">
+            <span>Lev Kany</span>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+        <nav class="site-nav" aria-label="Main">
+            <a href="/">Home</a>
+            <a href="/blog/" class="active">Blog</a>
+        </nav>
+    </div>
+</header>
+
+<section class="main">
+    <div class="container">
+        <a href="/blog/" class="blog-back">← Back to posts</a>
+
+        <header class="article-header">
+            <p class="hero-eyebrow">Kubernetes</p>
+            <h1 class="page-title">Why Multi-Zone Clusters Are Non-Negotiable for Production</h1>
+            <div class="blog-meta">
+                <span>February 5, 2026</span>
+                <span>·</span>
+                <span>4 min read</span>
+                <span class="card-tags">
+                    <span class="tag">Kubernetes</span>
+                    <span class="tag">Production</span>
+                </span>
+            </div>
+        </header>
+
+        <article>
+            <div class="blog-content">
+                <blockquote><p><b>Disclaimer:</b> No artificial intelligence tools or automated content generation systems were used in the creation of this content.</p></blockquote>
+
+                <p>
+                    To reduce infrastructure costs, our production environment ran on a single-zone Kubernetes cluster.
+                    At the time, that was a reasonable trade-off: traffic and operational scope were modest, and budget constraints made a lean footprint attractive.
+                    The decision was defensible on paper. In practice, it concentrated every dependency (compute, networking, and control-plane operations) into one failure domain.
+                    A full outage was not a question of if, but when.
+                </p>
+
+                <h2>How did it happen?</h2>
+
+                <p>
+                    A single-zone cluster means all nodes, workloads, and the cloud resources they depend on live in one availability zone.
+                    There is no geographic fallback within the cluster itself. When that zone cannot satisfy a scheduling or provisioning request, the blast radius is the entire production stack.
+                </p>
+
+                <p>
+                    The incident unfolded in the middle of the day during a routine deployment.
+                    ArgoCD attempted to sync a new manifest that required the creation of a GCP resource.
+                    The underlying zone had exhausted available capacity, so the resource could not be provisioned.
+                    ArgoCD offered no clear signal that the failure was capacity-related. The application remained in a perpetual <em>Progressing</em> state (the sync appeared to be underway, but it never completed).
+                </p>
+
+                <p>
+                    We tried to recover by recreating the related gateway manifest. That operation failed as well.
+                    With the zone still unable to allocate resources, the cluster entered a degraded state: delete operations hung, kubectl and other control interactions became unreliable, and orphaned services began to accumulate behind the scenes.
+                    Because the gateway had already been removed and could not be recreated, external traffic had no path into the environment.
+                    Production was unreachable.
+                </p>
+
+                <h2>How a multi-zonal cluster saved the day</h2>
+
+                <p>
+                    With the existing cluster effectively unusable, recovery required a clean path forward rather than incremental repair inside an exhausted zone.
+                    We stood up a separate multi-zonal cluster, bootstrapped the platform components, and synced the ArgoCD applications against the new environment.
+                    Once workloads were healthy, we updated DNS so the domain pointed to the new load balancer IP address.
+                    Service was restored.
+                </p>
+
+                <p>
+                    The fix worked because capacity and scheduling were no longer bound to a single zone.
+                    The same manifests that could not converge in the old cluster could be applied across zones in the new one, and the entry point (the gateway and its load balancer) could be recreated where resources were actually available.
+                </p>
+
+                <h2>Multi-zonal is a must for production</h2>
+
+                <p>
+                    For production workloads, a multi-zonal cluster should be treated as a baseline requirement, not an optional upgrade.
+                    Spreading nodes across zones does not eliminate operational risk, but it removes the single-zone dependency that turned a routine sync into a total outage.
+                </p>
+
+                <p>
+                    Cost pressure is real, and not every team can run large node pools in every zone.
+                    Even on a tight budget, distributing a minimal footprint (such as one node per zone) buys meaningful resilience compared with concentrating everything in a single zone and waiting for capacity exhaustion or zone-level failure to take production offline.
+                </p>
+            </div>
+        </article>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="container">
+        <small>© 2026 Lev Kany</small>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script src="../../main.js"></script>
+
+</body>
+</html>
